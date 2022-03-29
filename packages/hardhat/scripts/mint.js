@@ -12,12 +12,12 @@ const delayMS = 1000 //sometimes xDAI needs a 6000ms break lol 😅
 const main = async () => {
 
   // ADDRESS TO MINT TO:
-  const toAddress = "0x3Ad52d2068e269E76de5CD7c881Dc617f79122c9"
+  const toAddress = "0x98f912F4Ff783077218c79eB2970DAfcD04f228A"
 
   console.log("\n\n 🎫 Minting to "+toAddress+"...\n");
 
   const { deployer } = await getNamedAccounts();
-  const yourCollectible = await ethers.getContract("YourCollectible", deployer);
+  const yourCollectible = await ethers.getContract("FirepiePizzaToken", deployer);
 
   const buffalo = {
     "description": "It's actually a bison?",
