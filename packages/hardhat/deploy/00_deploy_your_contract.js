@@ -2,7 +2,10 @@
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy } = deployments;
-  const { deployer } = await getNamedAccounts();
+  const namedAccounts = await getNamedAccounts()
+  console.log(`namedAccounts deployer=${JSON.stringify(namedAccounts)}`)
+  const { deployer } = namedAccounts;
+  console.log(`FirepiePizzaToken deployer=${deployer}`)
   await deploy("FirepiePizzaToken", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
