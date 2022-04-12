@@ -1,0 +1,8 @@
+{
+    "name": "Firepie Pizzas",
+    "description": "Artisan woodfired pizza collectibles",
+    "image": "https://firepie-nft.s3.us-east-1.amazonaws.com/FP_Icon_512x512.png",
+    "external_link": "https://www.firepie.com/pages/nfts",
+    "seller_fee_basis_points": 200,
+    "fee_recipient": "0x00f6a8a7c146827A89De9bA33EdA5BA10eE0D7C4" 
+  }

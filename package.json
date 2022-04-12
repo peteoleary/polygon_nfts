@@ -62,5 +62,11 @@
       "**/hardhat",
       "**/hardhat/**"
     ]
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.0.3"
+  },
+  "dependencies": {
+    "hardhat-faucet": "^1.0.0"
   }
 }

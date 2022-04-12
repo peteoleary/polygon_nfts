@@ -1,30 +1,38 @@
-// File: contracts/WisdomHubMulti.sol
-// SPDX-License-Identifier: MIT
+pragma solidity >=0.6.0 <0.7.0;
+//SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
-
-import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+//import "hardhat/console.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+//learn more: https://docs.openzeppelin.com/contracts/3.x/erc721
 
-contract FirepiePizzaToken is ERC1155, Ownable {
-    uint256 public constant WISDOM = 0;
- 
-    constructor() ERC1155("https://raw.githubusercontent.com/BDU-NFT-Course/NFT-Metadata/main/sample-stones-erc1155/{id}.json"){
-        _mint(msg.sender,WISDOM,2,"");
+// GET LISTED ON OPENSEA: https://testnets.opensea.io/get-listed/step-two
+
+contract FirepiePizzaToken is ERC721, Ownable {
+
+  using Counters for Counters.Counter;
+  Counters.Counter private _tokenIds;
+
+  constructor() public ERC721("FirepiePizzaToken", "FRPT") {
+    _setBaseURI("http://firepie-nft.s3-website-us-east-1.amazonaws.com/");
+  }
+
+  function contractURI() public view returns (string memory) {
+        return "http://firepie-nft.s3-website-us-east-1.amazonaws.com/FRPT.json";
     }
 
-    function mint(address account, uint256 id, uint256 amount) public onlyOwner {
-        _mint(account, id, amount, "");
-    }
+  function mintItem(address to, string memory tokenURI)
+      public
+      onlyOwner
+      returns (uint256)
+  {
+      _tokenIds.increment();
 
-    function burn(address account, uint256 id, uint256 amount) public {
-        require(msg.sender == account);
-        _burn(account, id, amount);
-    }
+      uint256 id = _tokenIds.current();
+      _mint(to, id);
+      _setTokenURI(id, tokenURI);
 
-    function contractURI() public pure returns (string memory) {
-        return "https://raw.githubusercontent.com/BDU-NFT-Course/NFT-Metadata/main/sample-stones-erc1155/contract-metadata-erc1155.json";
-    }
-
+      return id;
+  }
 }
